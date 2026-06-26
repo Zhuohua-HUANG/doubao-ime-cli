@@ -134,6 +134,6 @@ doubao-voice
 现阶段 `doubao-voice` 继续发送豆包默认快捷键：
 
 ```text
-免按模式：左 Shift 单击
+免按模式：右 Option 单击
 长按模式：fn 长按
 ```

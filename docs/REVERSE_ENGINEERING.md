@@ -54,7 +54,7 @@ pressRespondMode
 1. 尽量读取公开 plist/defaults。
 2. 做少量只读、非侵入式的 Application Support 扫描。
 3. 如果读不到，就回退到观察到的豆包默认设置：
-   - 免按模式：左 Shift 单击
+   - 免按模式：右 Option 单击
    - 长按模式：fn 长按
 
 ## 为什么需要辅助功能权限

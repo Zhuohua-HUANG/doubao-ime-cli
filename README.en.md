@@ -36,7 +36,7 @@ DOUBAO_VOICE_LANG=en doubao-voice --help
 ## Features
 
 - `doubao-voice`  
-  Trigger smart hands-free voice input. It sends the left Shift tap to start Doubao voice input, then uses FunASR FSMN-VAD to detect speech start/end before auto-finishing.
+  Trigger smart hands-free voice input. It sends the right Option tap to start Doubao voice input, then uses FunASR FSMN-VAD to detect speech start/end before auto-finishing.
 
 - `doubao-voice handsfree`  
   Trigger hands-free mode manually. This sends the hands-free shortcut once and does not run smart endpointing, so it is useful when you want to control start/finish yourself.

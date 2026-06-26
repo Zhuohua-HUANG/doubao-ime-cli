@@ -54,7 +54,7 @@ The app uses MMKV internally. These settings are not guaranteed to be readable a
 1. Reads public plist/defaults where possible.
 2. Attempts a small, non-invasive scan of the Doubao application support folder.
 3. Falls back to the observed settings UI defaults:
-   - hands-free mode: left Shift tap
+   - hands-free mode: right Option tap
    - hold mode: fn hold
 
 ## Why Accessibility Permission Is Required

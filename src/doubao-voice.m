@@ -43,7 +43,7 @@ static NSString *const ConfigFileName = @"config.plist";
 static NSString *const ConfigKeyHandsFree = @"handsFreeKeyName";
 static NSString *const ConfigKeyHold = @"holdKeyName";
 
-static const char *DefaultHandsFreeKeyName = "left-shift";
+static const char *DefaultHandsFreeKeyName = "right-option";
 static const char *DefaultHoldKeyName = "fn";
 
 typedef enum {

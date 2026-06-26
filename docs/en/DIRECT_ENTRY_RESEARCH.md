@@ -134,6 +134,6 @@ doubao-voice
 For now, `doubao-voice` should continue sending the default Doubao shortcut:
 
 ```text
-hands-free: left Shift tap
+hands-free: right Option tap
 hold-to-talk: fn hold
 ```

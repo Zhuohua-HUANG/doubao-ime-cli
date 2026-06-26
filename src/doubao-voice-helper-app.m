@@ -24,7 +24,7 @@ static const AVAudioFrameCount FsmnAudioTapBufferSize = 16384;
 static const unsigned long FsmnModelEndSilenceMs = 800;
 static const unsigned long SmartStopGraceMs = 3000;
 
-static NSString *const DefaultHandsFreeKeyName = @"left-shift";
+static NSString *const DefaultHandsFreeKeyName = @"right-option";
 static NSString *const DefaultHoldKeyName = @"fn";
 
 typedef enum {
