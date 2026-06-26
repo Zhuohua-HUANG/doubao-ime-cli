@@ -1,6 +1,6 @@
 # <img src="assets/AppIcon.png" align="center" width="48" height="48" /> doubao-ime-cli
 
-一个 macOS 命令行工具和菜单栏助手，用来触发豆包输入法的语音输入快捷键。
+豆包输入法 CLI for Mac
 
 [![Build Status](https://github.com/Zhuohua-HUANG/doubao-ime-cli/actions/workflows/build.yml/badge.svg)](https://github.com/Zhuohua-HUANG/doubao-ime-cli/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
