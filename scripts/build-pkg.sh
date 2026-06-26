@@ -72,11 +72,8 @@ mkdir -p "$PKG_SCRIPTS" "$DIST_DIR"
 
 rm -rf "$RESOURCES_DIR"
 mkdir -p "$RESOURCES_DIR"
-if [ "$LANGUAGE" = "en" ]; then
-  cp "$ROOT_DIR/packaging/resources/en.lproj/"*.html "$RESOURCES_DIR/"
-else
-  cp "$ROOT_DIR/packaging/resources/zh_CN.lproj/"*.html "$RESOURCES_DIR/"
-fi
+cp -R "$ROOT_DIR/packaging/resources/en.lproj" "$RESOURCES_DIR/"
+cp -R "$ROOT_DIR/packaging/resources/zh_CN.lproj" "$RESOURCES_DIR/"
 
 install -m 0755 "$BUILD_DIR/$BINARY" "$PKG_ROOT/usr/local/bin/doubao-voice"
 install -m 0755 "$ROOT_DIR/scripts/doubao-voice-authorize.sh" "$PKG_ROOT/usr/local/bin/doubao-voice-authorize"
@@ -193,7 +190,7 @@ fi
 cat > "$DISTRIBUTION_XML" <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-  <title>$INSTALLER_TITLE</title>
+  <title>INSTALLER_TITLE</title>
   <welcome file="Welcome.html" mime-type="text/html"/>
   <readme file="ReadMe.html" mime-type="text/html"/>
   <conclusion file="Conclusion.html" mime-type="text/html"/>
@@ -201,7 +198,7 @@ cat > "$DISTRIBUTION_XML" <<EOF
   <choices-outline>
     <line choice="default"/>
   </choices-outline>
-  <choice id="default" title="$INSTALLER_TITLE">
+  <choice id="default" title="CHOICE_TITLE" description="CHOICE_DESC">
     <pkg-ref id="$IDENTIFIER"/>
     <pkg-ref id="dev.doubao-ime-cli.helper"/>
   </choice>

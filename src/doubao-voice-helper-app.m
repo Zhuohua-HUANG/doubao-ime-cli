@@ -235,8 +235,15 @@ static void saveConfig(NSDictionary *config) {
 
 static NSString *bundleDefaultLanguage(void) {
     NSString *language = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"DoubaoVoiceDefaultLanguage"];
-    if ([language isKindOfClass:[NSString class]] && [language hasPrefix:@"en"]) {
-        return @"en";
+    if ([language isKindOfClass:[NSString class]] && ([language hasPrefix:@"en"] || [language hasPrefix:@"zh"])) {
+        return [language hasPrefix:@"en"] ? @"en" : @"zh-Hans";
+    }
+    NSArray *preferred = [NSLocale preferredLanguages];
+    if (preferred.count > 0) {
+        NSString *first = preferred[0];
+        if ([first hasPrefix:@"en"]) {
+            return @"en";
+        }
     }
     return @"zh-Hans";
 }
