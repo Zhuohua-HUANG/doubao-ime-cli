@@ -1,6 +1,6 @@
 # <img src="assets/AppIcon.png" align="center" width="48" height="48" /> doubao-ime-cli
 
-豆包输入法 CLI for Mac
+MacOS 豆包输入法 CLI。让电脑上的Agent能够调用豆包输入法，辅助进行语音输入。
 
 [![Build Status](https://github.com/Zhuohua-HUANG/doubao-ime-cli/actions/workflows/build.yml/badge.svg)](https://github.com/Zhuohua-HUANG/doubao-ime-cli/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
