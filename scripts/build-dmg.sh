@@ -21,7 +21,7 @@ DIST_DIR="$ROOT_DIR/dist"
 RUNTIME_DIR="$BUILD_DIR/fsmn-runtime"
 DMG_ROOT="$BUILD_DIR/dmg-root"
 DMG_PATH="$DIST_DIR/doubao-ime-cli-$VERSION.dmg"
-VOLUME_NAME="Doubao Voice CLI"
+VOLUME_NAME="Doubao Voice CLI $VERSION"
 
 cd "$ROOT_DIR"
 
@@ -74,8 +74,11 @@ osascript -e "
   end tell
 " || true
 
+echo "Syncing filesystem writes..."
+sync
+sleep 2
+
 echo "Unmounting temporary DMG..."
-sleep 1
 hdiutil detach "$MOUNT_DIR" || hdiutil detach "$MOUNT_DIR" -force
 
 echo "Converting temporary DMG to compressed production format..."
