@@ -1,0 +1,98 @@
+#!/bin/sh
+set -eu
+
+# Package scripts run as root under Installer.app. We install the files first,
+# then try to start the user-facing permission flow for the logged-in console
+# user. This cannot grant the permission by itself; macOS requires a real user
+# click in System Settings.
+
+BIN="/usr/local/bin/doubao-voice"
+AUTH="/usr/local/bin/doubao-voice-authorize"
+INSTALL_FSMN="/usr/local/bin/doubao-voice-install-fsmn-vad"
+DOC="/usr/local/share/doubao-ime-cli/docs/USAGE.md"
+APP="/Applications/DoubaoVoiceCLI.app"
+FSMN_RUNTIME="/usr/local/share/doubao-ime-cli/fsmn-runtime"
+PACKAGE_LANGUAGE="zh-Hans"
+
+if [ "$PACKAGE_LANGUAGE" = "en" ] || [ "$PACKAGE_LANGUAGE" = "en-US" ]; then
+  echo "doubao-ime-cli installed."
+  echo "CLI: $BIN"
+  echo "Menu bar helper: $APP"
+  echo "Docs: $DOC"
+else
+  echo "doubao-ime-cli 已安装。"
+  echo "CLI: $BIN"
+  echo "菜单栏助手: $APP"
+  echo "文档: $DOC"
+fi
+
+if [ -x "$BIN" ]; then
+  DOUBAO_VOICE_LANG="${DOUBAO_VOICE_LANG:-$PACKAGE_LANGUAGE}" "$BIN" inspect || true
+fi
+
+CONSOLE_USER="$(/usr/bin/stat -f '%Su' /dev/console 2>/dev/null || true)"
+CONSOLE_UID=""
+CONSOLE_HOME=""
+if [ -n "$CONSOLE_USER" ] && [ "$CONSOLE_USER" != "root" ]; then
+  CONSOLE_UID="$(/usr/bin/id -u "$CONSOLE_USER" 2>/dev/null || true)"
+  CONSOLE_HOME="$(/usr/bin/dscl . -read "/Users/$CONSOLE_USER" NFSHomeDirectory 2>/dev/null | /usr/bin/awk '{print $2}' || true)"
+fi
+
+if [ -x "$INSTALL_FSMN" ]; then
+  if [ "$PACKAGE_LANGUAGE" = "en" ] || [ "$PACKAGE_LANGUAGE" = "en-US" ]; then
+    echo "Verifying bundled FunASR FSMN-VAD runtime and model..."
+  else
+    echo "正在验证内置 FunASR FSMN-VAD 运行时和模型..."
+  fi
+
+  if [ -n "$CONSOLE_UID" ] && [ -n "$CONSOLE_USER" ] && [ "$CONSOLE_USER" != "root" ]; then
+    if [ -z "$CONSOLE_HOME" ]; then
+      CONSOLE_HOME="/Users/$CONSOLE_USER"
+    fi
+    if [ -d "$FSMN_RUNTIME/modelscope-cache" ]; then
+      /usr/sbin/chown -R "$CONSOLE_USER":staff "$FSMN_RUNTIME/modelscope-cache" || true
+    fi
+    /bin/launchctl asuser "$CONSOLE_UID" /usr/bin/sudo -u "$CONSOLE_USER" /usr/bin/env \
+      HOME="$CONSOLE_HOME" \
+      PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" \
+      "$INSTALL_FSMN"
+  else
+    "$INSTALL_FSMN"
+  fi
+fi
+
+if [ -n "$CONSOLE_UID" ]; then
+    if [ -d "$APP" ]; then
+      /bin/launchctl asuser "$CONSOLE_UID" /usr/bin/sudo -u "$CONSOLE_USER" /usr/bin/open -g "$APP" || true
+    fi
+fi
+
+if [ "$PACKAGE_LANGUAGE" = "en" ] || [ "$PACKAGE_LANGUAGE" = "en-US" ]; then
+cat <<'EOF'
+
+Next common commands:
+  Click the "Doubao Voice CLI" icon in the top-right menu bar and confirm the two shortcuts match Doubao IME.
+  doubao-voice inspect --lang en
+  doubao-voice
+  doubao-voice hold --duration-ms 5000
+
+If voice input is not triggered, run:
+  doubao-voice-authorize
+
+EOF
+else
+cat <<'EOF'
+
+下一步常用命令:
+  点击右上角“豆包 Voice CLI”图标，确认两个快捷键与豆包输入法设置一致
+  doubao-voice inspect
+  doubao-voice
+  doubao-voice hold --duration-ms 5000
+
+如果语音输入没有被触发，请运行:
+  doubao-voice-authorize
+
+EOF
+fi
+
+exit 0

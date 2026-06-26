@@ -1,0 +1,19 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: make build
+      - name: Smoke test
+        run: build/doubao-voice --help
+      - name: Build installer package
+        run: make pkg
+      - name: Build English installer package
+        run: make LANGUAGE=en pkg
