@@ -6,9 +6,7 @@ MacOS 豆包输入法 CLI。让电脑上的Agent能够调用豆包输入法，�
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-macOS%2010.15%2B-blue.svg)](#)
 
-它不修改豆包输入法、不 patch 二进制、不绕过鉴权；它做的事情很简单：读取本机豆包输入法安装和部分可见配置，然后通过 macOS Accessibility/CoreGraphics 发送与豆包设置页一致的快捷键事件。
-
-推荐使用 DMG 拖拽安装。打开 DMG 后，把 App 拖到 Applications：
+读取本机豆包输入法安装和部分可见配置，然后通过 macOS Accessibility/CoreGraphics 发送与豆包设置页一致的快捷键事件。
 
 ```text
 /Applications/DoubaoVoiceCLI.app
