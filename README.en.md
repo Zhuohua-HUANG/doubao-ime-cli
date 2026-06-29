@@ -6,15 +6,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/Platform-macOS%2010.15%2B-blue.svg)](#)
 
-It does not modify Doubao IME, patch binaries, or bypass authentication. It reads local installation/configuration hints where possible, then sends the same macOS keyboard events that Doubao IME listens for.
+The `doubao-ime-cli` reads local installation/configuration hints where possible, then sends the same macOS keyboard events that Doubao IME listens for.
 
-The recommended artifact is the drag-to-Applications DMG. Open the DMG and drag the app to Applications:
 
 ```text
 /Applications/DoubaoVoiceCLI.app
 ```
 
-`DoubaoVoiceCLI.app` is the menu bar helper. Click its microphone icon in the top-right menu bar to configure:
+Click `DoubaoVoiceCLI.app` microphone icon in the top-right menu bar to configure:
 
 - hands-free shortcut: match Doubao's press-once voice shortcut
 - hold-to-talk shortcut: match Doubao's hold voice shortcut
